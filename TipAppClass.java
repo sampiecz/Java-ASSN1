@@ -11,9 +11,6 @@
  *                                                          *
  ************************************************************/ 
 
-// To do
-// 1. Fix the specific error by passing in a term variable just a string
-// 2. Handle negative numbers, perhaps pass in a string that determines the data type?
 
 import java.util.Scanner;
 
