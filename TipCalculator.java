@@ -6,45 +6,45 @@ public class TipCalculator
     private double partySize= 1;
 
     // Setters and getters
-    public setBillAmount(int billAmount)
+    public void setBillAmount(int billAmount)
     {
         this.billAmount = billAmount;
     }
 
-    public getBillAmount()
+    public double getBillAmount()
     {
         return this.billAmount;
     }
 
-    public setTipPercentage(int tipPercentage)
+    public void setTipPercentage(int tipPercentage)
     {
         this.tipPercentage = tipPercentage;
     }
 
-    public getTipPercentage()
+    public int getTipPercentage()
     {
-        return this.TipPercentage;
+        return this.tipPercentage;
     }
 
-    public setPartySize(int partySize)
+    public void setPartySize(int partySize)
     {
         this.partySize= partySize;
     }
 
-    public getPartySize()
+    public double getPartySize()
     {
         return this.partySize;
     }
 
     // Fancy methods
-    public getTotalBill()
+    public double getTotalBill()
     {
         return this.billAmount * this.tipPercentage + this.billAmount;
     }
 
-    public getIndividualShare()
+    public double getIndividualShare()
     {
-        this.getTotalBill() / this.getPartySize();
+        return this.getTotalBill() / this.getPartySize();
     }
 
 }
