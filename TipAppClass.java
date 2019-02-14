@@ -11,6 +11,10 @@
  *                                                          *
  ************************************************************/ 
 
+// To do
+// 1. Fix the specific error by passing in a term variable just a string
+// 2. Handle negative numbers, perhaps pass in a string that determines the data type?
+
 import java.util.Scanner;
 
 public class TipAppClass
@@ -26,7 +30,7 @@ public class TipAppClass
 		myTipAppClass.calculateTips();
 	}
 
-    public int getCleanInput(String message)
+    public double getCleanInput(String message, String var)
     {
 		// Create a scanner
 		Scanner inputScan = new Scanner(System.in);
@@ -37,12 +41,40 @@ public class TipAppClass
         // If the input is an integer
         if (inputScan.hasNextInt())
         {
-            // return the scanner obj
-            return inputScan.nextInt();
+            double doubleNumber =  inputScan.nextInt();
+
+            if (doubleNumber > 0) 
+            {
+                return doubleNumber;
+            }
+            else
+            {
+                String error_message = "Please enter a valid " + var + " : ";
+                return getCleanInput(error_message, var);
+            }
+
+
+        }
+        else if (inputScan.hasNextDouble())
+        {
+            double doubleNumber =  inputScan.nextDouble();
+
+            if (doubleNumber > 0) 
+            {
+                return doubleNumber;
+            }
+            else
+            {
+                String error_message = "Please enter a valid " + var + " : ";
+                return getCleanInput(error_message, var);
+            }
+
+
         }
         else 
         {
-            return getCleanInput("Please enter a valid number : ");
+            String error_message = "Please enter a valid " + var + " : ";
+            return getCleanInput(error_message, var);
         }
 
     }
@@ -65,9 +97,9 @@ public class TipAppClass
             TipCalculator myTipCalculator = new TipCalculator();
 
             // set bill amount if input okay 
-            myTipCalculator.setBillAmount(getCleanInput("Enter the bill amount: "));
-            myTipCalculator.setTipPercentage(getCleanInput("Enter your desired tip percentage (20 equals 20%): "));
-            myTipCalculator.setPartySize(getCleanInput("Enter the size of your party: "));
+            myTipCalculator.setBillAmount(getCleanInput("Enter the bill amount: ", "bill amount"));
+            myTipCalculator.setTipPercentage( (int) getCleanInput("Enter your desired tip percentage (20 equals 20%): ", "tip percentage"));
+            myTipCalculator.setPartySize(getCleanInput("Enter the size of your party: ", "party size"));
 
             // heading
             System.out.print("*** Your Bill ***\n\n");

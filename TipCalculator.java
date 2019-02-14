@@ -6,7 +6,7 @@ public class TipCalculator
     private double partySize= 1;
 
     // Setters and getters
-    public void setBillAmount(int billAmount)
+    public void setBillAmount(double billAmount)
     {
         this.billAmount = billAmount;
     }
@@ -26,7 +26,7 @@ public class TipCalculator
         return this.tipPercentage;
     }
 
-    public void setPartySize(int partySize)
+    public void setPartySize(double partySize)
     {
         this.partySize= partySize;
     }
