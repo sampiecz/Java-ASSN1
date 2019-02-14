@@ -26,110 +26,81 @@ public class TipAppClass
 		myTipAppClass.calculateTips();
 	}
 
+    public int getCleanInput(String message)
+    {
+		// Create a scanner
+		Scanner inputScan = new Scanner(System.in);
+
+		// Get input from user
+		System.out.print(message);
+
+        // If the input is an integer
+        if (inputScan.hasNextInt())
+        {
+            // return the scanner obj
+            return inputScan.nextInt();
+        }
+        else 
+        {
+            return getCleanInput("Please enter a valid number : ");
+        }
+
+    }
+
 
 	public void calculateTips()
 	{
 
-		// 1
-		// Create a scanner
-		Scanner billScan = new Scanner(System.in);
-
-		// 2
-		// Get input from user
-		System.out.print("Please enter bill amount: ");
-
-		// Instantiate TipCalculator object
-        TipCalculator myTipCalculator = new TipCalculator();
-
-
-		////
-		// Check if data okay - could be seperate function
-		if (billScan.hasNextInt())
-		{
-			// set bill amount if input okay 
-			myTipCalculator.setBillAmount(billScan.nextInt());
-		}
-		else
-		{
-			// if input bad redo 
-			System.out.print("Please enter a valid integer : ");
-
-			myTipCalculator.setBillAmount(billScan.nextInt());
-		}
-
-		// close scanner
-		billScan.close();
-
-		
-		// 3
-		// Prompt for and read tip percentage
-		Scanner tipScan = new Scanner(System.in);
-
-		System.out.print("Please enter tip percentage: ");
-
-		////
-		// Check if data okay - could be seperate function
-		if (tipScan.hasNextInt())
-		{
-			// set tip percentage if input okay 
-			myTipCalculator.setTipPercentage(tipScan.nextInt());
-		}
-		else
-		{
-			// if input bad redo 
-			System.out.print("Please enter a valid integer : ");
-			myTipCalculator.setTipPercentage(tipScan.nextInt());
-		}
-
-		tipScan.close();
-
-		// 4
-		// Prompt for and read party size 
-		Scanner partyScan = new Scanner(System.in);
-
-		System.out.print("Please enter party size: ");
-
-		partyScan.close();
-
-		////
-		// Check if data okay - could be seperate function
-		if (partyScan.hasNextInt())
-		{
-			// set party size if input okay 
-			myTipCalculator.setPartySize(partyScan.nextInt());
-		}
-		else
-		{
-			// if input bad redo 
-			System.out.print("Please enter a valid integer : ");
-			myTipCalculator.setPartySize(partyScan.nextInt());
-		}
-
-
-		// 5
-		// Get all of the data members
-        myTipCalculator.getBillAmount();
-        myTipCalculator.getTipPercentage();
-        myTipCalculator.getPartySize();
-
-		// Close out our tab 
-		myTipCalculator.getTotalBill();
-		myTipCalculator.getIndividualShare();
-
-		// 6
 		// Continue? 
-		//String onwards;
+        boolean again = true;
+		Scanner againScan = new Scanner(System.in);
 
-		//Scanner onwardScan = new Scanner(System.in);
+        // Primary header
+        System.out.print("*** Tip Calculator ***\n\n");
 
-		//System.out.print("Would you like to continue? (y/N): ");
+        while (again)
+        {
 
-		//onwards = onwardScan.nextLine();
+            // Instantiate TipCalculator object
+            TipCalculator myTipCalculator = new TipCalculator();
 
-		//onwardScan.close();
+            // set bill amount if input okay 
+            myTipCalculator.setBillAmount(getCleanInput("Enter the bill amount: "));
+            myTipCalculator.setTipPercentage(getCleanInput("Enter your desired tip percentage (20 equals 20%): "));
+            myTipCalculator.setPartySize(getCleanInput("Enter the size of your party: "));
 
-		
+            // heading
+            System.out.print("*** Your Bill ***\n\n");
+            
+            // Get all of the data members
+            System.out.print("Bill Amount: $" + myTipCalculator.getBillAmount() + "\n");
+            System.out.print("Tip Percentage: " + myTipCalculator.getTipPercentage() + "%\n");
+            System.out.print("Party Size: " + myTipCalculator.getPartySize() + "\n\n");
+
+            // Close out our tab 
+            System.out.print("Total Bill (with Tip): $" + myTipCalculator.getTotalBill() + "\n");
+            System.out.print("Share for Each Individual: $" + myTipCalculator.getIndividualShare() + "\n\n");
 
 
+            // Ask if we should continue
+            System.out.print("Another bill? (y/n): ");
+
+            if (againScan.nextLine().equalsIgnoreCase("y"))
+            {
+                again = true;
+            }
+            else
+            {
+                // Goodbye!
+                System.out.print("Goodbye!");
+                
+                // Stop loop
+                again = false;
+            }
+
+        }
+
+        // close scanner
+		againScan.close();
 	}
 }
